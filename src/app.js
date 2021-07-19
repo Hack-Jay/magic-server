@@ -6,12 +6,17 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require('./middlewares/jwt')
+const cors = require('./middlewares/cors')
+const { onerror, onNotFound } = require('./middlewares/error')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
 
 // error handler
-onerror(app)
+// onerror(app)
+app.use(onerror)
+
+app.use(cors)
 
 app.use(jwt)
 
